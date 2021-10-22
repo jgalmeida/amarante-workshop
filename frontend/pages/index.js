@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -16,6 +17,13 @@ export default function Home() {
           <a>Lamp!</a>
         </Link>
       </h1>
+
+        <Image
+          src="/images/3d-stripy-man-at-work.png" // Route of the image file
+          height={300} // Desired size with correct aspect ratio
+          width={300} // Desired size with correct aspect ratio
+          alt="Your Name"
+        />
 
         <p className="description">
           Get started by editing <code>pages/index.js</code>
