@@ -1,0 +1,7 @@
+.imageWrapper {
+  max-width: 50vw;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 48px 0;
+}

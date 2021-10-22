@@ -1,3 +1,11 @@
+:root {
+  --color-purple-dark: #212936;
+  --color-purple: #4D4E9D;
+  --color-neutral-0: #FFFFFF;
+  --color-neutral-1: #F5F6F7;
+  --color-neutral-2: #4D5562;
+}
+
 html,
 body {
   padding: 0;
@@ -6,6 +14,8 @@ body {
     Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.6;
   font-size: 18px;
+  background-color: var(--color-neutral-1);
+  color: var(--color-purple-dark);
 }
 
 * {
@@ -13,7 +23,7 @@ body {
 }
 
 a {
-  color: #0070f3;
+  color: var(--color-neutral-2);
   text-decoration: none;
 }
 
@@ -24,4 +34,8 @@ a:hover {
 img {
   max-width: 100%;
   display: block;
+}
+
+body, blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre, fieldset, ol, ul {
+  margin: 0px;
 }
