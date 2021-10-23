@@ -1,6 +1,6 @@
 import styles from './card.module.css'
 
-export default function Card({ title, image}) {
+export default function Card({ title, description, image }) {
   return (
       <div className={styles.card}>
         <div className={styles.image}>
@@ -8,7 +8,7 @@ export default function Card({ title, image}) {
         </div>
         <div className={styles.content}>
           <div className={styles.title}>{title}</div>
-          <p className={styles.description}>A estilo e o conforto numa só cadeira.</p>
+          {description && (<p className={styles.description}>{description}</p>)}
         </div>
       </div>
   )

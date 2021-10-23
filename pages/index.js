@@ -16,8 +16,6 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function Home() {
   const { data, error } = useSWR("/api/products", fetcher);
 
-  console.log(data);
-  
   return (
     <Layout home>
       <Head>
@@ -39,37 +37,49 @@ export default function Home() {
       </Section>
 
       <Section isGrey title="Os mais vendidos">
-        <ul className={styles.products}>
-          <li className={styles.product}>
-            <Card title={'Cadeira Green Comfy'} image={<Image
-              src="/images/3d-stripy-chair-1.png"
-              width={100}
-              height={0}
-              alt="Your Name"
-            />}/>
-          </li>
-          <li className={styles.product}>
-            <Card title={'Cadeira Green Comfy'} image={<Image
-              src="/images/3d-stripy-chair.png"
-              width={100}
-              height={0}
-              alt="Your Name"
-            />}/>
-          </li>
-          <li className={styles.product}>
-            <Card
-              title={'Cadeira Green Comfy'}
-              image={
-                <Image
-                  src="/images/3d-stripy-lamp-2.png"
-                  width={100}
-                  height={0}
-                  alt="Your Name"
-                />
-              }
-            />
-          </li>
-        </ul>
+        {!data && "Loading..."}
+        {data && (
+          <ul className={styles.products}>
+            {data.map(({ id, title, description, image }) => (
+              <li className={styles.product} key={id}>
+                <Card
+                  title={title}
+                  description={description}
+                  image={
+                    <Image
+                      src={image.url}
+                      width={100}
+                      height={0}
+                      alt={image.title}
+                    />
+                  }/>
+            </li>
+            ))}
+            
+            <li className={styles.product}>
+              <Card title={'Cadeira Green Comfy'} image={<Image
+                src="/images/3d-stripy-chair.png"
+                width={100}
+                height={0}
+                alt="Your Name"
+              />}/>
+            </li>
+            <li className={styles.product}>
+              <Card
+                title={'Cadeira Green Comfy'}
+                image={
+                  <Image
+                    src="/images/3d-stripy-lamp-2.png"
+                    width={100}
+                    height={0}
+                    alt="Your Name"
+                  />
+                }
+              />
+            </li>
+          </ul>
+        )}
+        
 
         <Link href="/ce">
           <a className={styles.link}>Ver todos os nossos produtos
