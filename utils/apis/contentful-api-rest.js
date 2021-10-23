@@ -9,15 +9,15 @@ export function api(url, options = {}) {
 		},
 	});
 }
-export async function getPosts() {
+export async function getProducts() {
 	const response = await api(
-		`${BASE_URL}/entries?content_type=post&select=sys.id,fields.name,fields.description,fields.image`
+		`${BASE_URL}/entries?content_type=product&select=sys.id,fields.name,fields.description,fields.value,fields.image`
 	);
 
 	return response.json();
 }
 
-export async function getPost(id) {
+export async function getProduct(id) {
 	const response = await api(`${BASE_URL}/entries/${id}`);
 
 	return response.json();
