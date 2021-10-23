@@ -2,7 +2,6 @@ const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${process.env
 const TOKEN = process.env.CONTENTFUL_DELIVERY_API_TOKEN;
 
 export function api({ query = {}, variables = {}, options = {} }) {
-	console.log(JSON.stringify({ query, variables }));
 	return fetch(BASE_URL, {
 		method: "POST",
 		headers: {
@@ -13,6 +12,7 @@ export function api({ query = {}, variables = {}, options = {} }) {
 		body: JSON.stringify({ query, variables }),
 	});
 }
+
 export async function getPosts() {
 	const query = `
     {
@@ -39,23 +39,19 @@ export async function getPosts() {
 
 export async function getPost(id) {
 	const query = `
-    {
-      query($id: Int) {
-        postCollection(id: $id) {
-          items {
-            sys {
-              id
-            }
-            name
-            description
-            image {
-              title
-              url
-            }
-          }
+    query($id: String!) {
+      post(id: $id) {
+        sys {
+          id
+        }
+        name
+        description
+        image {
+          title
+          url
         }
       }
-    } 
+    }
   `;
 
 	const response = await api({ query, variables: { id } });
