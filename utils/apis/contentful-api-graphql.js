@@ -2,21 +2,21 @@ const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${process.env
 const TOKEN = process.env.CONTENTFUL_DELIVERY_API_TOKEN;
 
 export function api({ query = {}, variables = {}, options = {} }) {
-	console.log("Making a request to", BASE_URL);
+  console.log("Making a request to", BASE_URL);
 
-	return fetch(BASE_URL, {
-		method: "POST",
-		headers: {
-			...options.headers,
-			Authorization: `Bearer ${TOKEN}`,
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ query, variables }),
-	});
+  return fetch(BASE_URL, {
+    method: "POST",
+    headers: {
+      ...options.headers,
+      Authorization: `Bearer ${TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query, variables }),
+  });
 }
 
 export async function getHeader() {
-	const query = `
+  const query = `
     query($id: String!) {
       header(id: $id) {
         name 
@@ -32,22 +32,22 @@ export async function getHeader() {
     } 
   `;
 
-	const response = await api({
-		query,
-		variables: { id: "4nEVPvNss877qvlDZzaK4p" },
-	});
+  const response = await api({
+    query,
+    variables: { id: "4nEVPvNss877qvlDZzaK4p" },
+  });
 
-	const json = await response.json();
-	const { header } = json.data;
+  const json = await response.json();
+  const { header } = json.data;
 
-	return {
-		name: header.name,
-		links: header.linksCollection.items,
-	};
+  return {
+    name: header.name,
+    links: header.linksCollection.items,
+  };
 }
 
 export async function getFooter() {
-	const query = `
+  const query = `
     query($id: String!) {
       footer(id: $id) {
         name 
@@ -63,22 +63,22 @@ export async function getFooter() {
     } 
   `;
 
-	const response = await api({
-		query,
-		variables: { id: "3aSTimhABYROcFcp6qoYle" },
-	});
+  const response = await api({
+    query,
+    variables: { id: "3aSTimhABYROcFcp6qoYle" },
+  });
 
-	const json = await response.json();
-	const { footer } = json.data;
+  const json = await response.json();
+  const { footer } = json.data;
 
-	return {
-		name: footer.name,
-		links: footer.linksCollection.items,
-	};
+  return {
+    name: footer.name,
+    links: footer.linksCollection.items,
+  };
 }
 
 export async function getProducts() {
-	const query = `
+  const query = `
     {
       productCollection {
         items {
@@ -97,14 +97,14 @@ export async function getProducts() {
     } 
   `;
 
-	const response = await api({ query });
-	const json = await response.json();
+  const response = await api({ query });
+  const json = await response.json();
 
-	return json.data.productCollection.items.map(transformProduct);
+  return json.data.productCollection.items.map(transformProduct);
 }
 
 export async function getProduct(id) {
-	const query = `
+  const query = `
     query($id: String!) {
       product(id: $id) {
         sys {
@@ -121,18 +121,18 @@ export async function getProduct(id) {
     }
   `;
 
-	const response = await api({ query, variables: { id } });
-	const json = await response.json();
+  const response = await api({ query, variables: { id } });
+  const json = await response.json();
 
-	return transformProduct(json.data.product);
+  return transformProduct(json.data.product);
 }
 
 export function transformProduct(product) {
-	return {
-		id: product.sys.id,
-		title: product.title,
-		description: product.description,
-		value: product.value,
-		image: { ...product.image },
-	};
+  return {
+    id: product.sys.id,
+    title: product.title,
+    description: product.description,
+    value: product.value,
+    image: { ...product.image },
+  };
 }
