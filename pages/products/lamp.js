@@ -10,7 +10,7 @@ export default function Lamp() {
       </Head>
       <h1>Lamp</h1>
       <h2>
-        <Link href="/">
+        <Link href="/products">
           <a>Back to home</a>
         </Link>
       </h2>
