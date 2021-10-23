@@ -2,6 +2,8 @@ const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${process.env
 const TOKEN = process.env.CONTENTFUL_DELIVERY_API_TOKEN;
 
 export function api({ query = {}, variables = {}, options = {} }) {
+	console.log("Making a request to", BASE_URL);
+
 	return fetch(BASE_URL, {
 		method: "POST",
 		headers: {
