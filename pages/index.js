@@ -10,8 +10,7 @@ import Button from '../components/button'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { fetcher } from '../utils/fetcher';
 
 export default function Home() {
   const { data, error } = useSWR("/api/products", fetcher);
@@ -55,33 +54,10 @@ export default function Home() {
                   }/>
             </li>
             ))}
-            
-            <li className={styles.product}>
-              <Card title={'Cadeira Green Comfy'} image={<Image
-                src="/images/3d-stripy-chair.png"
-                width={100}
-                height={0}
-                alt="Your Name"
-              />}/>
-            </li>
-            <li className={styles.product}>
-              <Card
-                title={'Cadeira Green Comfy'}
-                image={
-                  <Image
-                    src="/images/3d-stripy-lamp-2.png"
-                    width={100}
-                    height={0}
-                    alt="Your Name"
-                  />
-                }
-              />
-            </li>
           </ul>
         )}
-        
 
-        <Link href="/ce">
+        <Link href="/products">
           <a className={styles.link}>Ver todos os nossos produtos
           <FontAwesomeIcon icon={faArrowRight} className={styles.icon} />
           </a>

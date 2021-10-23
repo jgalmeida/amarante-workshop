@@ -3,9 +3,13 @@ import Layout from '../../components/layout'
 import Head from 'next/head'
 import Section from '../../components/section'
 import styles from './index.module.css'
+import useSWR from "swr";
 import Image from 'next/image'
+import { fetcher } from '../../utils/fetcher';
 
 export default function Products() {
+  const { data, error } = useSWR("/api/products", fetcher);
+
   return (
     <Layout>
       <Head>
@@ -13,34 +17,25 @@ export default function Products() {
       </Head>
 
       <Section title="Produtos">
-        <div className={styles.productsGrid}>
-        <Link href="/products">
-            <a className={styles.product}>
-              <Image
-                src="/images/lamp.png"
-                width={300}
-                height={300}
-                alt="Your Name"
-              />
-            </a>
-          </Link>
-          <div className={styles.product}>1</div>
-          <Link href="/products">
-            <a className={styles.product}>
-              <Image
-                src="/images/chair_2.png"
-                width={300}
-                height={300}
-                alt="Your Name"
-              />
-            </a>
-          </Link>
-          <div className={styles.product}>4</div>
-          <div className={styles.product}>4</div>
-          <div className={styles.product}>4</div>
-          <div className={styles.product}>4</div>
-          <div className={styles.product}>4</div>
-        </div>
+        {!data && "Loading..."}
+
+        {data && (
+          <div className={styles.productsGrid}>
+            {data.map(({ id, title, image}) => (
+              <Link href={`/products/${encodeURIComponent(id)}`} key={id}>
+                <a className={styles.product}>
+                  <Image
+                    src={image.url}
+                    width={300}
+                    height={300}
+                    alt={title}
+                  />
+                </a>
+              </Link>
+            ))}
+          </div>
+        )}
+
       </Section>
     </Layout>
   )
