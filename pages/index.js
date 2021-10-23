@@ -1,6 +1,13 @@
 import Head from "next/head";
+import useSWR from "swr";
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home() {
+  const { data, error } = useSWR("/api/products", fetcher);
+
+  console.log(data);
+
   return (
     <div className="container">
       <Head>
