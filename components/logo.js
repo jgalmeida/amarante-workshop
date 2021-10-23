@@ -5,7 +5,7 @@ export default function Logo() {
   return (
     <div className={styles.logoWrapper}>
       <Image
-        src="/images/logo.png" // Route of the image file
+        src="/images/logo.png"
         layout='fill'
         alt="Logo"
         className={styles.logo}

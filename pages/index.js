@@ -4,7 +4,12 @@ import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import useSWR from "swr";
 import styles from './index.module.css'
-import cn from 'classnames'
+import Card from '../components/card'
+import Section from '../components/section'
+import Button from '../components/button'
+import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -18,19 +23,89 @@ export default function Home() {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={cn(utilStyles.section, utilStyles.centeredtext)}>
+
+      <Section isGrey>
         <h1 className={utilStyles.heading2Xl}>Wave office</h1>
         <p className={utilStyles.lightText}>Material de escritório ergonómico, confortável e ajustável.</p>
         <p className={utilStyles.lightText}>Trabalhar agora é bem mais fácil.</p>
-        <div className={styles.imageWrapper}>
+        <div className={styles.mainImageWrapper}>
           <Image
-            src="/images/3d-stripy-man-at-work.png" // Route of the image file
-            height={420} // Desired size with correct aspect ratio
-            width={420} // Desired size with correct aspect ratio
-            alt="Your Name"
+            src="/images/3d-stripy-man-at-work.png"
+            height={420}
+            width={420}
+            alt="Man at work"
           />
         </div>
-      </section>
+      </Section>
+
+      <Section isGrey title="Os mais vendidos">
+        <ul className={styles.products}>
+          <li className={styles.product}>
+            <Card title={'Cadeira Green Comfy'} image={<Image
+              src="/images/3d-stripy-chair-1.png"
+              width={100}
+              height={0}
+              alt="Your Name"
+            />}/>
+          </li>
+          <li className={styles.product}>
+            <Card title={'Cadeira Green Comfy'} image={<Image
+              src="/images/3d-stripy-chair.png"
+              width={100}
+              height={0}
+              alt="Your Name"
+            />}/>
+          </li>
+          <li className={styles.product}>
+            <Card
+              title={'Cadeira Green Comfy'}
+              image={
+                <Image
+                  src="/images/3d-stripy-lamp-2.png"
+                  width={100}
+                  height={0}
+                  alt="Your Name"
+                />
+              }
+            />
+          </li>
+        </ul>
+
+        <Link href="/ce">
+          <a className={styles.link}>Ver todos os nossos produtos
+          <FontAwesomeIcon icon={faArrowRight} className={styles.icon} />
+          </a>
+        </Link>
+      </Section>
+      
+      <Section title="O que os nossos clientes dizem">
+        <div className={styles.userQuote}>
+          <p className={utilStyles.textItalic}>A melhor compra de sempre!</p>
+          <p className={utilStyles.textItalic}>Agora trabalhar de casa é muito mais ergonómico, confortável e produtivo!</p>
+        </div>
+        <p className={utilStyles.lightText}>Joana Silva</p>
+      </Section>
+      
+      <Section isGrey>
+        <div className={styles.sectionQuestions}>
+          <div className={styles.cta}>
+            <h1 className={utilStyles.headingXl}>
+              <p>Ainda tem dúvidas?</p>
+              <p>Fale connosco!</p>
+            </h1>
+            <Button text='Enviar mensagem'/>
+          </div>
+
+          <div className={styles.imageContainer}>
+            <Image
+              src="/images/speak.png"
+              width={300}
+              height={300}
+              alt="Your Name"
+            />
+          </div>
+        </div>
+      </Section>
     </Layout>
   )
 }

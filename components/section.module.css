@@ -1,0 +1,17 @@
+.section {
+  position: relative;
+  background-color: var(--color-neutral-0);
+}
+
+.section.isGrey {
+  background-color: var(--color-neutral-1);
+}
+
+.sectionContainer {
+  max-width: 80vw;
+  margin: 0 auto;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+  padding-bottom: 4rem;
+  padding-top: 4rem;
+}

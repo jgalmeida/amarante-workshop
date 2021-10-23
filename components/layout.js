@@ -1,7 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import MainMenu from './mainMenu.js'
 import Logo from './logo.js'
@@ -11,7 +9,7 @@ export const siteTitle = 'Next.js Sample Website'
 
 export default function Layout({ children, home }) {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -27,9 +25,11 @@ export default function Layout({ children, home }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <header className={styles.header}>
+      <header className={styles.container}>
+      <div className={styles.header}>
         <Logo />
         <MainMenu />
+        </div>
       </header>
       <main>{children}</main>
       {!home && (
