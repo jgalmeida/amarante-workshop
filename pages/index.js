@@ -12,8 +12,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { fetcher } from '../utils/fetcher';
 
-export default function Home() {
+export default function Home({ usersFeedback }) {
   const { data, error } = useSWR("/api/products", fetcher);
+  console.log('usersFeedback', usersFeedback)
 
   return (
     <Layout home>
@@ -65,11 +66,15 @@ export default function Home() {
       </Section>
       
       <Section title="O que os nossos clientes dizem">
-        <div className={styles.userQuote}>
-          <p className={utilStyles.textItalic}>A melhor compra de sempre!</p>
-          <p className={utilStyles.textItalic}>Agora trabalhar de casa é muito mais ergonómico, confortável e produtivo!</p>
-        </div>
-        <p className={utilStyles.lightText}>Joana Silva</p>
+        {usersFeedback && usersFeedback.map(({ content, who }) => (
+          <React.Fragment>
+            <div className={styles.userQuote}>
+              <p className={utilStyles.textItalic}>{content}</p>
+              <p className={utilStyles.textItalic}>Agora trabalhar de casa é muito mais ergonómico, confortável e produtivo!</p>
+            </div>
+            <p className={utilStyles.lightText}>{who}</p>
+          </React.Fragment>
+        ))}
       </Section>
       
       <Section isGrey>
@@ -94,4 +99,18 @@ export default function Home() {
       </Section>
     </Layout>
   )
+}
+import { getProducts } from "../utils/apis/contentful-api-graphql";
+
+export async function getStaticProps() {
+  // Get external data from the file system, API, DB, etc.
+  const usersFeedback = await getProducts();
+
+  // The value of the `props` key will be
+  //  passed to the `Home` component
+  return {
+    props: {
+      usersFeedback,
+    }
+  }
 }
