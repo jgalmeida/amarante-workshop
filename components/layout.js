@@ -4,8 +4,7 @@ import Link from 'next/link'
 import MainMenu from './mainMenu.js'
 import Logo from './logo.js'
 
-const name = 'Your Name'
-export const siteTitle = 'Next.js Sample Website'
+export const siteTitle = 'Wave office website'
 
 export default function Layout({ children, home }) {
   return (
@@ -27,7 +26,9 @@ export default function Layout({ children, home }) {
       </Head>
       <header className={styles.container}>
         <div className={styles.header}>
-          <Logo />
+        <Link href="/">
+            <a><Logo /></a>
+          </Link>
           <MainMenu />
         </div>
         {!home && (
