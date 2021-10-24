@@ -1,5 +1,5 @@
 const BASE_URL = `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master`;
-const TOKEN = process.env.CONTENTFUL_DELIVERY_API_TOKEN;
+const TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 
 export function api(url, options = {}) {
   return fetch(url, {
