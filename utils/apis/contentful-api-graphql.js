@@ -77,6 +77,25 @@ export async function getFooter() {
   };
 }
 
+export async function getReviews() {
+  const query = `
+    {
+      reviewCollection {
+        items {
+          who
+          content
+        }
+      }
+    } 
+  `;
+
+  const response = await api({ query });
+
+  const json = await response.json();
+
+  return json.data.reviewCollection.items;
+}
+
 export async function getProducts() {
   const query = `
     {
