@@ -26,8 +26,8 @@ export default function Products() {
                 <a className={styles.product}>
                   <Image
                     src={image.url}
-                    width={300}
-                    height={300}
+                    width={200}
+                    height={200}
                     alt={title}
                   />
                 </a>

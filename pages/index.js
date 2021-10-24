@@ -8,15 +8,15 @@ import Card from '../components/card'
 import Section from '../components/section'
 import Button from '../components/button'
 import Link from 'next/link'
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { fetcher } from '../utils/fetcher';
 import { getReviews } from "../utils/apis/contentful-api-graphql";
-import React from 'react';
 
 export default function Home({ reviews }) {
   const { data, error } = useSWR("/api/products", fetcher);
-  console.log('reviews', reviews)
+  const productsList = data && data.slice(0, 4)
 
   return (
     <Layout home>
@@ -24,7 +24,7 @@ export default function Home({ reviews }) {
         <title>{siteTitle}</title>
       </Head>
 
-      <Section isGrey>
+      <Section>
         <h1 className={utilStyles.heading2Xl}>Wave office</h1>
         <p className={utilStyles.lightText}>Material de escritório ergonómico, confortável e ajustável.</p>
         <p className={utilStyles.lightText}>Trabalhar agora é bem mais fácil.</p>
@@ -39,14 +39,13 @@ export default function Home({ reviews }) {
       </Section>
 
       <Section isGrey title="Os mais vendidos">
-        {!data && "Loading..."}
-        {data && (
+        {!productsList && "Loading..."}
+        {productsList && (
           <ul className={styles.products}>
-            {data.map(({ id, title, description, image }) => (
+            {productsList.map(({ id, title, description, image }) => (
               <li className={styles.product} key={id}>
                 <Card
                   title={title}
-                  description={description}
                   image={
                     <Image
                       src={image.url}

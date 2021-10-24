@@ -3,8 +3,11 @@ import Head from 'next/head'
 import Section from '../../components/section'
 import styles from './[productid].module.css'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import useSWR from "swr";
+import Button from '../../components/button'
+import utilStyles from '../../styles/utils.module.css'
+import cn from 'classnames'
+import { useRouter } from 'next/router'
 import { fetcher } from '../../utils/fetcher';
 
 export default function Product() {
@@ -25,16 +28,26 @@ export default function Product() {
       )}
 
       {data && (
-        <Section title={data.title}>
-          <div>{data.description}</div>
-          <div>€{data.value}</div>
-          <div>
-            <Image
-              src={data.image.url}
-              width={300}
-              height={300}
-              alt={data.image.title}
-            />
+        <Section>
+          <div className={styles.content}>
+            <div className={styles.image}>
+              <Image
+                src={data.image.url}
+                width={400}
+                height={400}
+                alt={data.image.title}
+              />
+            </div>
+
+            <div className={styles.info}>
+              <div>
+                <div className={cn(utilStyles.headingXl, styles.productName)}>{data.title}</div>
+                <div className={styles.description}>{data.description}</div>
+                <div className={styles.price}>€{data.value}</div>
+              </div>
+
+              <Button text='Reservar produto' />
+            </div>
           </div>
         </Section>
       )}
