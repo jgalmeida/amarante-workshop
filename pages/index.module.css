@@ -38,8 +38,12 @@
   width: 16px;
 }
 
-/* userQuote */
-.userQuote {
+/* reviews */
+.review {
+  margin-bottom: 36px;
+}
+
+.content {
   margin-bottom: 12px;
 }
 

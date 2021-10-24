@@ -11,10 +11,12 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { fetcher } from '../utils/fetcher';
+import { getReviews } from "../utils/apis/contentful-api-graphql";
+import React from 'react';
 
-export default function Home({ usersFeedback }) {
+export default function Home({ reviews }) {
   const { data, error } = useSWR("/api/products", fetcher);
-  console.log('usersFeedback', usersFeedback)
+  console.log('reviews', reviews)
 
   return (
     <Layout home>
@@ -66,14 +68,14 @@ export default function Home({ usersFeedback }) {
       </Section>
       
       <Section title="O que os nossos clientes dizem">
-        {usersFeedback && usersFeedback.map(({ content, who }) => (
-          <React.Fragment>
-            <div className={styles.userQuote}>
+        {reviews && reviews.map(({ content, who }) => (
+          <div className={styles.review}>
+            <div className={styles.content}>
               <p className={utilStyles.textItalic}>{content}</p>
               <p className={utilStyles.textItalic}>Agora trabalhar de casa é muito mais ergonómico, confortável e produtivo!</p>
             </div>
             <p className={utilStyles.lightText}>{who}</p>
-          </React.Fragment>
+          </div>
         ))}
       </Section>
       
@@ -100,17 +102,16 @@ export default function Home({ usersFeedback }) {
     </Layout>
   )
 }
-import { getProducts } from "../utils/apis/contentful-api-graphql";
 
 export async function getStaticProps() {
   // Get external data from the file system, API, DB, etc.
-  const usersFeedback = await getProducts();
+  const reviews = await getReviews();
 
   // The value of the `props` key will be
   //  passed to the `Home` component
   return {
     props: {
-      usersFeedback,
+      reviews,
     }
   }
 }
