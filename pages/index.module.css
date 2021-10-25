@@ -1,0 +1,64 @@
+/* Welcome section */
+.mainImageWrapper {
+  max-width: 50vw;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 48px 0;
+  padding-bottom: 0;
+}
+
+/* Most sold */
+.products {
+  display: flex;
+  margin-bottom: 48px;
+}
+
+.product {
+  flex: 1;
+  margin: 0 12px;
+}
+
+.product:first-child {
+  margin-left: 0;
+}
+
+.product:last-child {
+  margin-right: 0;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-purple);
+}
+
+.icon {
+  width: 16px;
+}
+
+/* reviews */
+.review {
+  margin-bottom: 36px;
+}
+
+.content {
+  margin-bottom: 12px;
+}
+
+/* sectionQuestions */
+.sectionQuestions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sectionQuestions .cta {
+  flex: 2;
+  text-align: left;
+}
+
+.sectionQuestions .imageContainer {
+  flex: 1;  
+}

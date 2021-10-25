@@ -1,0 +1,13 @@
+.menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 6rem;
+}
+
+.item {
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}

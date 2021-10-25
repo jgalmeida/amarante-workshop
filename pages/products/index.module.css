@@ -1,0 +1,18 @@
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 24px;
+}
+
+.product {
+  height: 16rem;
+  background-color: var(--color-neutral-1);
+  padding: 24px;
+  transition: .2s;
+}
+
+.product:hover {
+  cursor: pointer;
+  transform: scale(1.04);
+}
