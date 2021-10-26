@@ -1,22 +1,22 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import Layout, { siteTitle } from "../components/layout";
+import utilStyles from "../styles/utils.module.css";
 import useSWR from "swr";
-import styles from './index.module.css'
-import Card from '../components/card'
-import Section from '../components/section'
-import Button from '../components/button'
-import Link from 'next/link'
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-import { fetcher } from '../utils/fetcher';
+import styles from "./index.module.css";
+import Card from "../components/card";
+import Section from "../components/section";
+import Button from "../components/button";
+import Link from "next/link";
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { fetcher } from "../utils/fetcher";
 import { getReviews } from "../utils/apis/contentful-api-graphql";
 
 export default function Home({ reviews }) {
   const { data, error } = useSWR("/api/products", fetcher);
-  const productsList = data && data.slice(0, 4)
+  const productsList = data && data.slice(0, 4);
 
   return (
     <Layout home>
@@ -26,8 +26,12 @@ export default function Home({ reviews }) {
 
       <Section>
         <h1 className={utilStyles.heading2Xl}>Wave office</h1>
-        <p className={utilStyles.lightText}>Material de escritório ergonómico, confortável e ajustável.</p>
-        <p className={utilStyles.lightText}>Trabalhar agora é bem mais fácil.</p>
+        <p className={utilStyles.lightText}>
+          Material de escritório ergonómico, confortável e ajustável.
+        </p>
+        <p className={utilStyles.lightText}>
+          Trabalhar agora é bem mais fácil.
+        </p>
         <div className={styles.mainImageWrapper}>
           <Image
             src="/images/3d-stripy-man-at-work.png"
@@ -53,31 +57,37 @@ export default function Home({ reviews }) {
                       height={0}
                       alt={image.title}
                     />
-                  }/>
-            </li>
+                  }
+                />
+              </li>
             ))}
           </ul>
         )}
 
         <Link href="/products">
-          <a className={styles.link}>Ver todos os nossos produtos
-          <FontAwesomeIcon icon={faArrowRight} className={styles.icon} />
+          <a className={styles.link}>
+            Ver todos os nossos produtos
+            <FontAwesomeIcon icon={faArrowRight} className={styles.icon} />
           </a>
         </Link>
       </Section>
-      
+
       <Section title="O que os nossos clientes dizem">
-        {reviews && reviews.map(({ content, who }) => (
-          <div className={styles.review}>
-            <div className={styles.content}>
-              <p className={utilStyles.textItalic}>{content}</p>
-              <p className={utilStyles.textItalic}>Agora trabalhar de casa é muito mais ergonómico, confortável e produtivo!</p>
+        {reviews &&
+          reviews.map(({ content, who }) => (
+            <div className={styles.review}>
+              <div className={styles.content}>
+                <p className={utilStyles.textItalic}>{content}</p>
+                <p className={utilStyles.textItalic}>
+                  Agora trabalhar de casa é muito mais ergonómico, confortável e
+                  produtivo!
+                </p>
+              </div>
+              <p className={utilStyles.lightText}>{who}</p>
             </div>
-            <p className={utilStyles.lightText}>{who}</p>
-          </div>
-        ))}
+          ))}
       </Section>
-      
+
       <Section isGrey>
         <div className={styles.sectionQuestions}>
           <div className={styles.cta}>
@@ -85,7 +95,7 @@ export default function Home({ reviews }) {
               <p>Ainda tem dúvidas?</p>
               <p>Fale connosco!</p>
             </h1>
-            <Button text='Enviar mensagem'/>
+            <Button text="Enviar mensagem" />
           </div>
 
           <div className={styles.imageContainer}>
@@ -99,18 +109,18 @@ export default function Home({ reviews }) {
         </div>
       </Section>
     </Layout>
-  )
+  );
 }
 
 export async function getStaticProps() {
   // Get external data from the file system, API, DB, etc.
-  const reviews = await getReviews();
+  //const reviews = await getReviews();
 
   // The value of the `props` key will be
   //  passed to the `Home` component
   return {
     props: {
-      reviews,
-    }
-  }
+      //reviews,
+    },
+  };
 }
