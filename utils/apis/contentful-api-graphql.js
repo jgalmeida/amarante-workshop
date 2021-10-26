@@ -1,7 +1,7 @@
 const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`;
 const TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 
-export function api({ query = {}, variables = {}, options = {} }) {
+export function api({ query = {}, variables = {}, options = { headers: {} } }) {
   console.log("Making a request to", BASE_URL);
 
   return fetch(BASE_URL, {
